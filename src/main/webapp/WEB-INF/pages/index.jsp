@@ -9,49 +9,8 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="css/template.css">
+  <link rel="stylesheet" type="text/css" href="css/w3css.css">
     <title></title>
-
-  <style>
-    .button {
-      background-color: #4CAF50; /* Green */
-      border: none;
-      color: white;
-      padding: 8px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-    }
-
-    .button2 {background-color: #008CBA;} /* Blue */
-    .button3 {background-color: #f44336;} /* Red */
-    .button4 {background-color: #e7e7e7; color: black;} /* Gray */
-    .button5 {background-color: #555555;} /* Black */
-
-    .select-style {
-      border: 1px solid #ccc;
-      width: 120px;
-      border-radius: 3px;
-      overflow: hidden;
-      /*background: #fafafa url("img/icon-select.png") no-repeat 90% 50%;*/
-    }
-
-    .select-style select {
-      padding: 5px 8px;
-      width: 130%;
-      border: none;
-      box-shadow: none;
-      background: transparent;
-      background-image: none;
-      -webkit-appearance: none;
-    }
-
-    .select-style select:focus {
-      outline: none;
-    }
-  </style>
 </head>
 <body>
 
@@ -70,19 +29,53 @@
   </div>
 
   <div class="col-6 col-m-9">
-    <h1>The City</h1>
-    <p>Chania is the capital of the Chania region on the island of Crete. The city can be divided in two parts, the old town and the modern city.</p>
-    <input class="button" type="button" value="OK"/>
 
-    <div class="select-style">
-      <select>
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
+    <div class="w3-container w3-green">
+      <h2>Create Doctor</h2>
     </div>
+
+
+    <form class="w3-container">
+      <p>
+        <label>Name</label>
+        <input class="w3-input" type="text"></p>
+      <p>
+        <label>Phone number</label>
+        <input class="w3-input" type="text"></p>
+      <br>
+      <p>
+        <select class="w3-select" name="option">
+          <option value="" disabled selected>Select Category</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select></p>
+
+      <p>
+      <button class="w3-btn w3-blue">Register</button>
+      </p>
+
+
+    </form>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <div class="col-3 col-m-12">
     <div class="aside">
