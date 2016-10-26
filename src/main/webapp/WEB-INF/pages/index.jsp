@@ -29,34 +29,11 @@
   </div>
 
   <div class="col-6 col-m-9">
-
-    <div class="w3-container w3-green">
-      <h2>Create Doctor</h2>
-    </div>
-
-
-    <form class="w3-container">
-      <p>
-        <label>Name</label>
-        <input class="w3-input" type="text"></p>
-      <p>
-        <label>Phone number</label>
-        <input class="w3-input" type="text"></p>
-      <br>
-      <p>
-        <select class="w3-select" name="option">
-          <option value="" disabled selected>Select Category</option>
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-        </select></p>
-
-      <p>
-      <button class="w3-btn w3-blue">Register</button>
-      </p>
+<div>
+    <jsp:include page='dashBoard.jsp'/>
+</div>
 
 
-    </form>
   </div>
 
 
