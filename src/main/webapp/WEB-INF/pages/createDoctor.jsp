@@ -24,7 +24,7 @@
   <p>
     <label>Phone number</label>
     <input class="w3-input" type="text"></p>
-  <br>
+ <p></p>
   <p>
     <select class="w3-select" name="option">
       <option value="" disabled selected>Select Category</option>

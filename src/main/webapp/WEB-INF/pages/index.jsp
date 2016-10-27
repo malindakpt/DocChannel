@@ -30,7 +30,7 @@
 
   <div class="col-6 col-m-9">
 <div>
-    <jsp:include page='dashBoard.jsp'/>
+    <jsp:include page='channelManager.jsp'/>
 </div>
 
 
