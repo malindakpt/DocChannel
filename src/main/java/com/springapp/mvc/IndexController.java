@@ -10,7 +10,46 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IndexController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-		model.addAttribute("message", "Hello world!");
+		return "index";
+	}
+}
+
+@Controller
+ @RequestMapping("/channelManager")
+ class ChannelManagerController {
+	@RequestMapping(method = RequestMethod.GET)
+	public String printWelcome(ModelMap model) {
+		model.addAttribute("page2", "channelManager");
+		return "index";
+	}
+}
+
+@Controller
+@RequestMapping("/createChannel")
+class CreateChannelController {
+	@RequestMapping(method = RequestMethod.GET)
+	public String printWelcome(ModelMap model) {
+		model.addAttribute("page2", "createChannel");
+		return "index";
+	}
+}
+
+@Controller
+@RequestMapping("/dashBoard")
+class DashboardManagerController {
+	@RequestMapping(method = RequestMethod.GET)
+	public String printWelcome(ModelMap model) {
+		model.addAttribute("page2", "dashBoard");
+		return "index";
+	}
+}
+
+@Controller
+@RequestMapping("/createDoctor")
+class CreateDoctorController {
+	@RequestMapping(method = RequestMethod.GET)
+	public String printWelcome(ModelMap model) {
+		model.addAttribute("page2", "createDoctor");
 		return "index";
 	}
 }

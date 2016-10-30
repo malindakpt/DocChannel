@@ -26,7 +26,7 @@
     <p class="watch">
         24
     </p>
-
+    <%  String s=request.getRequestURI();%>
     <p>
         <select class="w3-select" name="option">
             <option value="" disabled selected>Select Hospital</option>
