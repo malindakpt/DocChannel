@@ -1,6 +1,8 @@
 package com.mkpt;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by admin on 10/25/2016.
@@ -16,7 +18,7 @@ public class DBLink {
     public static Connection getConnection(){
         errorMsg = new StringBuilder();
         try {
-            return DriverManager.getConnection("jdbc:mysql://localhost/tenders?" + "user=root&password=");
+            return DriverManager.getConnection("jdbc:mysql://localhost/docChannel?" + "user=root&password=");
 //           return DriverManager.getConnection("jdbc:mysql://127.7.45.130:3306/voction?" + "user=adminV5y9umD&password=J8etWW3ma6fB");
 //            return DriverManager.getConnection("jdbc:mysql://127.6.96.130:3306/voction5?" + "user=adminEMicr6f&password=4jsJ98UdgFMf");
 
@@ -37,7 +39,23 @@ public class DBLink {
             e.printStackTrace();
         }
     }
+    public static List<String> getTypes(){
+        List<String> types=new ArrayList<String>();
+        try {
+            connect = getConnection();
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("select * from types");
 
+
+            while (resultSet.next()) {
+                types.add(resultSet.getString(2));
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            return null;
+        }
+        return types;
+    }
     public static boolean validateUser(String email,String pwd){
 
         try {

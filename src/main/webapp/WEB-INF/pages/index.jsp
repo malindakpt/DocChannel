@@ -10,6 +10,8 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/template.css">
     <link rel="stylesheet" type="text/css" href="css/w3css.css">
+    <script src="js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="css/sweetalert.css"/>
     <title></title>
 </head>
 <body>
