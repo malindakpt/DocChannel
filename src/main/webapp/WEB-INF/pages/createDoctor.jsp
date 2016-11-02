@@ -41,17 +41,20 @@
         </select></p>
 
     <p>
-        <button class="w3-btn w3-blue" onclick="addDOctor()">Register</button>
+        <button class="w3-btn w3-blue" onclick="tryAdd()">Register</button>
     </p>
 
 
 </div>
 
 <script>
-    function addDOctor(){
-        swal("Oops...", "asd", "error");
+    function addDOctor(response){
+        swal("Hi...", response, "success");
     }
 
+    function tryAdd(){
+        ajaxCall("/createDoctorServlet","fname=Henry&lname=Ford",addDOctor);
+    }
 
 </script>
 </body>

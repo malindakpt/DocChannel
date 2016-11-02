@@ -91,5 +91,19 @@
 <div class="footer">
     <p>Resize the browser window to see how the content respond to the resizing.</p>
 </div>
+
+<script>
+    function ajaxCall(servlet,parameters,callBackfn) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                callBackfn(this.responseText);
+            }
+        };
+        xhttp.open("POST", servlet, true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(parameters);
+    }
+</script>
 </body>
 </html>
