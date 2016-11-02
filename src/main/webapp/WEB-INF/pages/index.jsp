@@ -93,6 +93,11 @@
 </div>
 
 <script>
+
+    function readValue(object){
+        return document.getElementById(object).value;
+    }
+
     function ajaxCall(servlet,parameters,callBackfn) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {

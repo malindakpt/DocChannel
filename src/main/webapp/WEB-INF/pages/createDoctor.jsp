@@ -23,7 +23,7 @@
 <div class="w3-container">
     <p>
         <label>Name</label>
-        <input class="w3-input" type="text"></p>
+        <input id="docName" class="w3-input" type="text"></p>
 
     <p>
         <label>Phone number</label>
@@ -38,7 +38,8 @@
             <%for (int i = 0; i < types.size(); i++) {%>
                 <option value="1"><%=types.get(i)%></option>
             <%}%>
-        </select></p>
+        </select>
+    </p>
 
     <p>
         <button class="w3-btn w3-blue" onclick="tryAdd()">Register</button>
@@ -53,7 +54,7 @@
     }
 
     function tryAdd(){
-        ajaxCall("/createDoctorServlet","fname=Henry&lname=Ford",addDOctor);
+        ajaxCall("/createDoctorServlet","fname="+readValue("docName"),addDOctor);
     }
 
 </script>
