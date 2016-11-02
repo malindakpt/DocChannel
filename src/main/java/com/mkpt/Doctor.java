@@ -7,7 +7,6 @@ public class Doctor {
     private int ID;
     private String Name;
     private int type;
-    private int number;
     private String Phone;
 
     public int getID() {
@@ -34,13 +33,6 @@ public class Doctor {
         this.type = type;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
 
     public String getPhone() {
         return Phone;

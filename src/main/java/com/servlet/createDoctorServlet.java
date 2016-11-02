@@ -1,5 +1,8 @@
 package com.servlet;
 
+import com.mkpt.DBLink;
+import com.mkpt.Doctor;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +19,23 @@ public class createDoctorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter resp = response.getWriter();
 
-        String docName= request.getParameter("fname");
-        System.out.println("asd");
+        String docName= request.getParameter("docName");
+        String docPhone= request.getParameter("docPhone");
+        int docType= Integer.parseInt(request.getParameter("docType"));
 
-        resp.println("Good Morning "+docName);
+        String email= request.getParameter("email");
+        String pwd= request.getParameter("pwd");
+
+        Doctor doc = new Doctor();
+        doc.setName(docName);
+        doc.setPhone(docPhone);
+        doc.setType(docType);
+
+        String result=DBLink.addDoctor(doc,email,pwd);
+        if(result!=null){
+            resp.println(result);
+        }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

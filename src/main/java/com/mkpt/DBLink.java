@@ -48,7 +48,7 @@ public class DBLink {
 
 
             while (resultSet.next()) {
-                types.add(resultSet.getString(2));
+                types.add(resultSet.getString(1)+"#"+resultSet.getString(2));
             }
         }catch (Exception e){
             errorMsg.append(e.getMessage());
@@ -61,7 +61,7 @@ public class DBLink {
         try {
             connect = getConnection();
             statement = connect.createStatement();
-            resultSet = statement.executeQuery("select * from hospitals where email='" + email+"' and pwd='"+pwd+"'");
+            resultSet = statement.executeQuery("select * from users where email='" + email+"' and pwd='"+pwd+"'");
 
             if (resultSet.next()) {
                 return true;
@@ -73,31 +73,30 @@ public class DBLink {
         return false;
     }
 
-    public static boolean addDoctor(Doctor doc,int adID, String email, String pwd){
+    public static String addDoctor(Doctor doc, String email, String pwd){
         errorMsg = new StringBuilder();
         if(!validateUser(email,pwd)){
-            return false;
+            return "Invalid Email or Password";
         }
         try {
             statement=connect.createStatement();
             connect = getConnection();
             preparedStatement = connect
-                    .prepareStatement("insert into  doctors values ( ?, ?,?,?,?)");
+                    .prepareStatement("insert into  doctors values ( ?, ?,?,?)");
 
             preparedStatement.setInt(1, doc.getID());
             preparedStatement.setString(2, doc.getName());
             preparedStatement.setInt(3,doc.getType());
-            preparedStatement.setInt(4, doc.getNumber());
-            preparedStatement.setString(5, doc.getPhone());
+            preparedStatement.setString(4, doc.getPhone());
 
 
             preparedStatement.executeUpdate();
 
-            return true;
+            return null;
         }catch (Exception e){
             errorMsg.append(e.getMessage());
             e.printStackTrace();
-            return false;
+            return e.getMessage();
         }
     }
 }

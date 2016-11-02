@@ -97,6 +97,10 @@
     function readValue(object){
         return document.getElementById(object).value;
     }
+    function readSelect(object) {
+        var e = document.getElementById(object);
+        return e.options[e.selectedIndex].value;
+    }
 
     function ajaxCall(servlet,parameters,callBackfn) {
         var xhttp = new XMLHttpRequest();

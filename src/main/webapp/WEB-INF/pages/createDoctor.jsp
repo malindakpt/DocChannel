@@ -27,20 +27,25 @@
 
     <p>
         <label>Phone number</label>
-        <input class="w3-input" type="text"></p>
+        <input id="docPhone" class="w3-input" type="text"></p>
 
     <p></p>
 
     <p>
-        <select class="w3-select" name="option">
+        <select id="docType" class="w3-select" name="option">
             <option value="" disabled selected>Select Category</option>
             <%List<String> types= DBLink.getTypes();%>
             <%for (int i = 0; i < types.size(); i++) {%>
-                <option value="1"><%=types.get(i)%></option>
+            <%
+                String id=types.get(i).split("#")[0];
+                String type=types.get(i).split("#")[1];
+            %>
+                <option value="<%=id%>"><%=type%></option>
             <%}%>
         </select>
     </p>
 
+    <jsp:include page='auth.jsp'/>
     <p>
         <button class="w3-btn w3-blue" onclick="tryAdd()">Register</button>
     </p>
@@ -50,11 +55,17 @@
 
 <script>
     function addDOctor(response){
-        swal("Hi...", response, "success");
+        if(response==""){
+            swal("Done", "Doctor profile created", "success");
+        }else{
+            swal("Opps..", response, "error");
+        }
+
     }
 
     function tryAdd(){
-        ajaxCall("/createDoctorServlet","fname="+readValue("docName"),addDOctor);
+        ajaxCall("/createDoctorServlet","docName="+readValue("docName")+'&docPhone='+readValue("docPhone")+'&docType='+readSelect("docType")
+                +'&email='+readValue("email")+'&pwd='+readValue("pwd"),addDOctor);
     }
 
 </script>
