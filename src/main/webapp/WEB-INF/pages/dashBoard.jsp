@@ -20,11 +20,6 @@
 
 
 <div class="w3-container">
-    <%--<select class="w3-select" name="option">--%>
-        <%--<option value="0">Search by Hospital</option>--%>
-        <%--<option value="1">Search by Doctor</option>--%>
-    <%--</select>--%>
-
     <p class="watch">
         24
     </p>
@@ -46,9 +41,6 @@
     <p>
         <select id="docList" class="w3-select" name="option">
             <option value="" disabled selected>Select Doctor</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
         </select></p>
     <p>
         <label>Hospital Contact No</label>
@@ -61,16 +53,13 @@
 </div>
 <script>
     function processResponse(response){
-
-            addElementsToSelect("docList",response);
+        addElementsToSelect("docList",response,"Select a Doctor");
         swal({
             title: "Wait. . .",
             text: "",
             timer: 1,
             showConfirmButton: false
         });
-            //swal("Opps..", response, "error");
-
     }
 
     function setDoctors(){

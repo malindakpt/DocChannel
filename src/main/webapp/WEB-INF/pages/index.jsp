@@ -117,7 +117,7 @@
         xhttp.send(parameters);
     }
 
-    function addElementsToSelect(object,list){
+    function addElementsToSelect(object,list,defaultVal){
 
         var select = document.getElementById(object);
         select.innerHTML = "";
@@ -127,7 +127,7 @@
         var opt0 = document.createElement("option");
         opt0.disabled = true;
         opt0.value = "1000-1000";
-        opt0.textContent = "Select a Doctor";
+        opt0.textContent = defaultVal;
         select.appendChild(opt0);
 
         docList.forEach(function (item, index) {

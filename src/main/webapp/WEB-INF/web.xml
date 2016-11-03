@@ -5,6 +5,18 @@
 
 	<display-name>Spring MVC Application</display-name>
 
+    <servlet>
+        <servlet-name>getChannelSessionsServlet</servlet-name>
+        <servlet-class>com.servlet.getChannelSessionsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getChannelSessionsServlet</servlet-name>
+        <url-pattern>/getChannelSessionsServlet</url-pattern>
+    </servlet-mapping>
+
+
+
+
 	<servlet>
 		<servlet-name>getDoctorListOfHospitalServlet</servlet-name>
 		<servlet-class>com.servlet.getDoctorListOfHospitalServlet</servlet-class>

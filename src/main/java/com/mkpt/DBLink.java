@@ -109,6 +109,24 @@ public class DBLink {
         return list;
     }
 
+    public static String getChannelSessions(int hosptId,int docId){
+        String list="";
+        try {
+            connect = getConnection();
+            statement = connect.createStatement();
+         //   resultSet = statement.executeQuery("select channel.id,channel.weekDay, channel.time  from channel INNER JOIN doctors ON channel.docId=doctors.id where hospitalId=" + hosptId + " and docId=" + docId);
+            resultSet = statement.executeQuery("select channel.id,channel.weekDay, channel.time  from channel  where hospitalId="+hosptId+" and docId="+docId);
+
+            while (resultSet.next()) {
+                list=list+"$"+(resultSet.getInt(1)+"#"+resultSet.getString(2)+"-"+resultSet.getString(3));
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            return null;
+        }
+        return list;
+    }
+
     public static boolean validateUser(String email,String pwd){
 
         try {
