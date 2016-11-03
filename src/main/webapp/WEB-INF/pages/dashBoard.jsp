@@ -1,3 +1,5 @@
+<%@ page import="com.mkpt.DBLink" %>
+<%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
   User: admin
@@ -18,25 +20,31 @@
 
 
 <div class="w3-container">
-    <select class="w3-select" name="option">
-        <option value="0">Search by Hospital</option>
-        <option value="1">Search by Doctor</option>
-    </select>
+    <%--<select class="w3-select" name="option">--%>
+        <%--<option value="0">Search by Hospital</option>--%>
+        <%--<option value="1">Search by Doctor</option>--%>
+    <%--</select>--%>
 
     <p class="watch">
         24
     </p>
-    <%  String s=request.getRequestURI();%>
-    <p>
-        <select class="w3-select" name="option">
-            <option value="" disabled selected>Select Hospital</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-        </select></p>
+
+        <p>
+            <select id="hospital" class="w3-select" name="option"  onchange="setDoctors()">
+                <option value="" disabled selected>Select a Hospital</option>
+                <%List<String> hospitals= DBLink.getHospitals();%>
+                <%for (int i = 0; i < hospitals.size(); i++) {%>
+                <%
+                    String id=hospitals.get(i).split("#")[0];
+                    String hosp=hospitals.get(i).split("#")[1];
+                %>
+                <option value="<%=id%>"><%=hosp%></option>
+                <%}%>
+            </select>
+        </p>
 
     <p>
-        <select class="w3-select" name="option">
+        <select id="docList" class="w3-select" name="option">
             <option value="" disabled selected>Select Doctor</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
@@ -51,6 +59,34 @@
 
 
 </div>
+<script>
+    function processResponse(response){
 
+            addElementsToSelect("docList",response);
+        swal({
+            title: "Wait. . .",
+            text: "",
+            timer: 1,
+            showConfirmButton: false
+        });
+            //swal("Opps..", response, "error");
+
+    }
+
+    function setDoctors(){
+        swal({
+            title: "Loading Doctors. . . ",
+            text: "Please wait few seconds",
+            timer: 20000,
+            showConfirmButton: false
+        });
+
+        var hospId=readSelect("hospital");
+
+        ajaxCall("/getDoctorListOfHospitalServlet",
+                'hospId='+hospId,processResponse);
+
+    }
+</script>
 </body>
 </html>

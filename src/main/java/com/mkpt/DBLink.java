@@ -90,6 +90,25 @@ public class DBLink {
         }
         return types;
     }
+
+    public static String getDoctorsOfHospitals(int hosptId){
+        String list="";
+        try {
+            connect = getConnection();
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("select doctors.id,doctors.name from channel INNER JOIN doctors ON channel.docId=doctors.id where hospitalId="+hosptId);
+
+
+            while (resultSet.next()) {
+                list=list+"$"+(resultSet.getString(1)+"#"+resultSet.getString(2));
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            return null;
+        }
+        return list;
+    }
+
     public static boolean validateUser(String email,String pwd){
 
         try {

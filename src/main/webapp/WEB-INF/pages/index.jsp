@@ -116,6 +116,35 @@
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(parameters);
     }
+
+    function addElementsToSelect(object,list){
+
+        var select = document.getElementById(object);
+        select.innerHTML = "";
+
+        var docList = list.split("$");
+
+        var opt0 = document.createElement("option");
+        opt0.disabled = true;
+        opt0.value = "1000-1000";
+        opt0.textContent = "Select a Doctor";
+        select.appendChild(opt0);
+
+        docList.forEach(function (item, index) {
+            try {
+                if(index>0) {
+                    var opt = document.createElement("option");
+                    opt.value = item.split("#")[0];
+                    opt.textContent = item.split("#")[1];
+                    select.appendChild(opt);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        });
+
+        select.selectedIndex=0;
+    }
 </script>
 </body>
 </html>

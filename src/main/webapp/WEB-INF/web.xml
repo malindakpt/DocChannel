@@ -6,6 +6,15 @@
 	<display-name>Spring MVC Application</display-name>
 
 	<servlet>
+		<servlet-name>getDoctorListOfHospitalServlet</servlet-name>
+		<servlet-class>com.servlet.getDoctorListOfHospitalServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>getDoctorListOfHospitalServlet</servlet-name>
+		<url-pattern>/getDoctorListOfHospitalServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>createChannelServlet</servlet-name>
 		<servlet-class>com.servlet.createChannelServlet</servlet-class>
 	</servlet>
@@ -13,6 +22,7 @@
 		<servlet-name>createChannelServlet</servlet-name>
 		<url-pattern>/createChannelServlet</url-pattern>
 	</servlet-mapping>
+
 
 
     <servlet>
