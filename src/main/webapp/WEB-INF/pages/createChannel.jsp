@@ -18,7 +18,7 @@
 </div>
 
 
-<form class="w3-container">
+<div class="w3-container">
 
     <p>
         <select id="hospital" class="w3-select" name="option">
@@ -81,8 +81,12 @@
 
     <script>
 
-        function processResponse(){
-
+        function processResponse(response){
+            if(response==""){
+                swal("Done", "Channel session created", "success");
+            }else{
+                swal("Opps..", response, "error");
+            }
         }
 
 
@@ -109,7 +113,7 @@
 
     </script>
 
-</form>
+</div>
 
 </body>
 </html>

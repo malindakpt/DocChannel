@@ -11,7 +11,7 @@
     <title></title>
 </head>
 <body>
-<form class="w3-container">
+<div class="w3-container">
     <div class="w3-container w3-red">
         <h2>Channel Manager</h2>
     </div>
@@ -50,6 +50,6 @@
     </p>
 
 
-</form>
+</div>
 </body>
 </html>

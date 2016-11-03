@@ -17,7 +17,7 @@
 </div>
 
 
-<form class="w3-container">
+<div class="w3-container">
     <select class="w3-select" name="option">
         <option value="0">Search by Hospital</option>
         <option value="1">Search by Doctor</option>
@@ -50,7 +50,7 @@
     </p>
 
 
-</form>
+</div>
 
 </body>
 </html>
