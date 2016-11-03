@@ -97,6 +97,9 @@
     function readValue(object){
         return document.getElementById(object).value;
     }
+    function writeValue(object,value){
+        document.getElementById(object).value=value;
+    }
     function readSelect(object) {
         var e = document.getElementById(object);
         return e.options[e.selectedIndex].value;

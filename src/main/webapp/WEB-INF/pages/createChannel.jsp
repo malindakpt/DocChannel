@@ -1,3 +1,5 @@
+<%@ page import="com.mkpt.DBLink" %>
+<%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
   User: admin
@@ -19,24 +21,37 @@
 <form class="w3-container">
 
     <p>
-        <select class="w3-select" name="option">
+        <select id="hospital" class="w3-select" name="option">
             <option value="" disabled selected>Select a Hospital</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-        </select></p>
+            <%List<String> hospitals= DBLink.getHospitals();%>
+            <%for (int i = 0; i < hospitals.size(); i++) {%>
+            <%
+                String id=hospitals.get(i).split("#")[0];
+                String hosp=hospitals.get(i).split("#")[1];
+            %>
+            <option value="<%=id%>"><%=hosp%></option>
+            <%}%>
+        </select>
+    </p>
 
     <p>
-        <select class="w3-select" name="option">
+
+        <select id="doctor" class="w3-select" name="option" onchange="setType()">
             <option value="" disabled selected>Select a Doctor</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-        </select></p>
+            <%List<String> doctors= DBLink.getDoctors();%>
+            <%for (int i = 0; i < doctors.size(); i++) {%>
+            <%
+                String id=doctors.get(i).split("#")[0]+"#"+doctors.get(i).split("#")[2];
+                String doc=doctors.get(i).split("#")[1];
+            %>
+            <option value="<%=id%>"><%=doc%></option>
+            <%}%>
+        </select>
+
 
     <p>
         <label>Type</label>
-        <input class="w3-input" type="text" value="VOG" disabled></p>
+        <input id="docType" class="w3-input" type="text" value="Doctor Type" disabled></p>
 
 
     <p>
@@ -59,16 +74,19 @@
         <label>Max Patients</label>
         <input class="w3-input" type="number"/></p>
 
-    <p>
-        <label>User Name</label>
-        <input class="w3-input" type="text" style="max-width: 200px"/></p>
-    <p>
-        <label>Password</label>
-        <input class="w3-input" type="password" style="max-width: 200px"/></p>
+    <jsp:include page='auth.jsp'/>
     <p>
         <button class="w3-btn w3-blue">Register</button>
     </p>
 
+    <script>
+        function setType(){
+            var e = document.getElementById("doctor");
+            var type = e.options[e.selectedIndex].value.split("#")[1];
+            writeValue("docType",type);
+        }
+
+    </script>
 
 </form>
 

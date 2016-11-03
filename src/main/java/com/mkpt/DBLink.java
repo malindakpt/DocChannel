@@ -56,6 +56,40 @@ public class DBLink {
         }
         return types;
     }
+
+    public static List<String> getDoctors(){
+        List<String> types=new ArrayList<String>();
+        try {
+            connect = getConnection();
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("select doctors.id,doctors.name,types.caption from doctors INNER JOIN types ON doctors.type=types.id");
+
+            while (resultSet.next()) {
+                types.add(resultSet.getString(1)+"#"+resultSet.getString(2)+"#"+resultSet.getString(3));
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            return null;
+        }
+        return types;
+    }
+    public static List<String> getHospitals(){
+        List<String> types=new ArrayList<String>();
+        try {
+            connect = getConnection();
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("select * from hospitals");
+
+
+            while (resultSet.next()) {
+                types.add(resultSet.getString(1)+"#"+resultSet.getString(2));
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            return null;
+        }
+        return types;
+    }
     public static boolean validateUser(String email,String pwd){
 
         try {
