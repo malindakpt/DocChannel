@@ -55,36 +55,57 @@
 
 
     <p>
-        <select class="w3-select" name="option">
+        <select id="weekDay" class="w3-select" name="option">
             <option value="" disabled selected>Select a Week day</option>
-            <option value="1">Sunday</option>
-            <option value="2">Monday</option>
-            <option value="3">Tuesday</option>
-            <option value="3">Wednesday</option>
-            <option value="3">Thursday</option>
-            <option value="3">Friday</option>
-            <option value="3">Saturday</option>
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
         </select></p>
     <p>
 
         <label>Time</label>
-        <input class="w3-input" type="time" name="bdaytime"></p>
+        <input id="time" class="w3-input" type="time" name="bdaytime"></p>
 
     <p>
         <label>Max Patients</label>
-        <input class="w3-input" type="number"/></p>
+        <input id="max" class="w3-input" type="number"/></p>
 
     <jsp:include page='auth.jsp'/>
     <p>
-        <button class="w3-btn w3-blue">Register</button>
+        <button class="w3-btn w3-blue" onclick="createChannel()">Register</button>
     </p>
 
     <script>
+
+        function processResponse(){
+
+        }
+
+
+        function createChannel(){
+            ajaxCall("/createChannelServlet",
+                    'hospital='+readSelect("hospital")+
+                    '&docId='+readSelect("doctor")+
+                    '&weekDay='+readSelect("weekDay")+
+                    '&time='+readValue("time")+
+                    '&max='+readValue("max")+
+                    '&email='+readValue("email")+
+                    '&pwd='+readValue("pwd")
+                    ,processResponse);
+        }
+
+
         function setType(){
             var e = document.getElementById("doctor");
             var type = e.options[e.selectedIndex].value.split("#")[1];
             writeValue("docType",type);
         }
+
+
 
     </script>
 

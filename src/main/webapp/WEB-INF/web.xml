@@ -5,6 +5,16 @@
 
 	<display-name>Spring MVC Application</display-name>
 
+	<servlet>
+		<servlet-name>createChannelServlet</servlet-name>
+		<servlet-class>com.servlet.createChannelServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>createChannelServlet</servlet-name>
+		<url-pattern>/createChannelServlet</url-pattern>
+	</servlet-mapping>
+
+
     <servlet>
 		<servlet-name>createDoctorServlet</servlet-name>
 		<servlet-class>com.servlet.createDoctorServlet</servlet-class>

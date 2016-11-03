@@ -133,4 +133,37 @@ public class DBLink {
             return e.getMessage();
         }
     }
+    public static String addChannel(Channel  ch, String email, String pwd){
+        errorMsg = new StringBuilder();
+        if(!validateUser(email,pwd)){
+            return "Invalid Email or Password";
+        }
+        try {
+            statement=connect.createStatement();
+            connect = getConnection();
+            preparedStatement = connect
+                    .prepareStatement("insert into  channel values ( ?,?,?,?,?,?,?,?,?)");
+
+            preparedStatement.setInt(1, ch.getID());
+            preparedStatement.setInt(2, ch.getDocID());
+            preparedStatement.setInt(3,ch.getHospitalID());
+            preparedStatement.setString(4, ch.getWeekDay());
+
+           preparedStatement.setString(5, ch.getTime());
+             preparedStatement.setDate(6, (Date) ch.getNextDate());
+
+            preparedStatement.setInt(7, 0);
+            preparedStatement.setInt(8, ch.getMaxPatients());
+            preparedStatement.setInt(9, 0);
+
+
+            preparedStatement.executeUpdate();
+
+            return null;
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
 }

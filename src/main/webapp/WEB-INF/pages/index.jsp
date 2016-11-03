@@ -102,7 +102,7 @@
     }
     function readSelect(object) {
         var e = document.getElementById(object);
-        return e.options[e.selectedIndex].value;
+        return e.options[e.selectedIndex].value.split("#")[0];
     }
 
     function ajaxCall(servlet,parameters,callBackfn) {

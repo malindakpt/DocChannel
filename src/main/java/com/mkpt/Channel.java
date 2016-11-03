@@ -10,7 +10,7 @@ public class Channel {
     private int docID;
     private int hospitalID;
     private String weekDay;
-    private Date time;
+    private String time;
     private Date nextDate;
     private int nextPatientNo;
     private int maxPatients;
@@ -48,11 +48,11 @@ public class Channel {
         this.weekDay = weekDay;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
