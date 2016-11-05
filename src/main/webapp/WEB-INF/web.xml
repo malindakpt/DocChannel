@@ -5,6 +5,17 @@
 
 	<display-name>Spring MVC Application</display-name>
 
+
+	<servlet>
+		<servlet-name>getChannelUpdateServlet</servlet-name>
+		<servlet-class>com.servlet.getChannelUpdateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>getChannelUpdateServlet</servlet-name>
+		<url-pattern>/getChannelUpdateServlet</url-pattern>
+	</servlet-mapping>
+
+
 	<servlet>
 		<servlet-name>setChannelCountServlet</servlet-name>
 		<servlet-class>com.servlet.setChannelCountServlet</servlet-class>

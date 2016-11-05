@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2016 at 12:33 PM
+-- Generation Time: Nov 05, 2016 at 09:33 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -36,17 +36,19 @@ CREATE TABLE IF NOT EXISTS `channel` (
   `patientNo` int(11) DEFAULT NULL,
   `maxPatients` int(11) NOT NULL,
   `enabled` int(11) NOT NULL,
+  `lastUpdated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `channel`
 --
 
-INSERT INTO `channel` (`id`, `docId`, `hospitalId`, `weekDay`, `time`, `nextDate`, `patientNo`, `maxPatients`, `enabled`) VALUES
-(1, 4, 1, 'Tuesday', '17:55', NULL, 0, 44, 0),
-(2, 5, 1, 'Wednesday', '14:22', NULL, 0, 222, 0),
-(3, 6, 2, 'Saturday', '15:55', NULL, 0, 41, 0);
+INSERT INTO `channel` (`id`, `docId`, `hospitalId`, `weekDay`, `time`, `nextDate`, `patientNo`, `maxPatients`, `enabled`, `lastUpdated`) VALUES
+(1, 4, 1, 'Tuesday', '17:55', NULL, 5, 44, 0, '2016-11-05 19:03:34'),
+(2, 5, 1, 'Wednesday', '14:22', NULL, 5, 222, 0, '2016-11-05 19:03:34'),
+(3, 6, 2, 'Saturday', '15:55', NULL, 24, 41, 0, '2016-11-05 19:03:34'),
+(4, 4, 1, 'Sunday', '11:11', NULL, 0, 12, 0, '2016-11-05 19:03:34');
 
 -- --------------------------------------------------------
 

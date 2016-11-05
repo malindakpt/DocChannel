@@ -109,6 +109,44 @@ public class DBLink {
         return list;
     }
 
+    public static String getChannelUpdate(int id){
+        try {
+            connect = getConnection();
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("select patientNo,lastUpdated  from channel  where id="+id);
+
+            java.util.Date date= new java.util.Date();
+            Timestamp now =new Timestamp(date.getTime());
+
+            while (resultSet.next()) {
+                String text;
+                Timestamp lastUpdated=resultSet.getTimestamp(2);
+
+                long dif = now.getTime()-lastUpdated.getTime();
+                long difmin=dif/60000;
+
+                if(difmin<60){
+                        text="Last updated : "+difmin+" minutes ago";
+                }else{
+                    long hh = difmin / 60;
+                    if(hh<24) {
+                        hh = difmin / 60;
+                        long mm = difmin % 60;
+
+                        text ="Last updated : "+ hh+" hrs and "+mm+" mins ago";
+                    }else{
+                        text ="Last updated : "+ hh/24 +" days ago";
+                    }
+                }
+                return resultSet.getInt(1)+"#"+text;
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            return null;
+        }
+        return null;
+    }
+
     public static String getChannelSessions(int hosptId,int docId){
         String list="";
         try {
