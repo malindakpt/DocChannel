@@ -144,6 +144,27 @@ public class DBLink {
         return false;
     }
 
+    public static String setChannelCount(int channelId,int count, String email, String pwd){
+        errorMsg = new StringBuilder();
+        if(!validateUser(email,pwd)){
+            return "Invalid Email or Password";
+        }
+        try {
+            statement=connect.createStatement();
+            connect = getConnection();
+            preparedStatement = connect
+                    .prepareStatement("update channel set patientNo="+count+" where id="+channelId);
+
+            preparedStatement.executeUpdate();
+
+            return "";
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
+
     public static String addDoctor(Doctor doc, String email, String pwd){
         errorMsg = new StringBuilder();
         if(!validateUser(email,pwd)){

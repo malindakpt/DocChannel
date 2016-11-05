@@ -104,6 +104,12 @@
         var e = document.getElementById(object);
         return e.options[e.selectedIndex].value.split("#")[0];
     }
+    function readInnerHTML(object) {
+        return document.getElementById(object).innerHTML;
+    }
+    function setInnerHTML(object,value) {
+        return document.getElementById(object).innerHTML=value;
+    }
 
     function ajaxCall(servlet,parameters,callBackfn) {
         var xhttp = new XMLHttpRequest();

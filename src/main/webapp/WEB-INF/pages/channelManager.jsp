@@ -18,17 +18,13 @@
 </div>
 <div class="w3-container">
 
-    <p>
-
-    <h3><b>Asiri Hospital</b></h3>
-
     <p class="watch">
     <span style="padding-right: 30px">
-        <button class="w3-btn w3-blue" style="font-size: 20px;">Prev</button>
+        <button class="w3-btn w3-blue" style="font-size: 20px;" onclick="prev()">Prev</button>
         </span>
-        24
+       <label id="patientNo">1</label>
     <span style="padding-left: 30px">
-        <button class="w3-btn w3-blue" style="font-size: 20px;">Next</button>
+        <button class="w3-btn w3-blue" style="font-size: 20px;" onclick="next()">Next</button>
         </span>
     </p>
     </p>
@@ -63,6 +59,52 @@
 
 
 <script>
+ var number=1;
+    function next(){
+        number=Number(readInnerHTML('patientNo'))+1;
+        setCount(number);
+
+    }
+
+    function prev(){
+        number=Number(readInnerHTML('patientNo'))-1;
+        setCount(number);
+    }
+
+    function setCount(count){
+        swal({
+                    title: "Sending Patient No",
+                    text: "Please confirm...",
+                    type: "info",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                },
+                function(){
+                    ajaxCall("/setChannelCountServlet",
+                            'email='+readValue('email')
+                            +'&pwd='+readValue('pwd')
+                            +'&channelId='+readSelect('channelSessions')
+                            +'&patientNo='+count,
+
+                            processSetCount);
+                });
+
+    }
+    function processSetCount(response){
+        if(response=="") {
+            swal({
+                title: "Updated",
+                text: "",
+                timer: 100,
+                showConfirmButton: false
+            });
+            setInnerHTML('patientNo',number)
+        }else{
+            swal("Opps..", response, "error");
+        }
+
+    }
 
     function setChannelSessions(){
         swal({
