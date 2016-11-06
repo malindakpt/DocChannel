@@ -56,6 +56,8 @@
 <script>
     function addDOctor(response){
         if(response==""){
+//
+//            window.location.href="/dashBoard";
             swal("Done", "Doctor profile created", "success");
         }else{
             swal("Opps..", response, "error");
@@ -64,8 +66,25 @@
     }
 
     function tryAdd(){
-        ajaxCall("/createDoctorServlet","docName="+readValue("docName")+'&docPhone='+readValue("docPhone")+'&docType='+readSelect("docType")
-                +'&email='+readValue("email")+'&pwd='+readValue("pwd"),addDOctor);
+        swal({
+                    title: "Creating Doctor Profile",
+                    text: "Are You Sure ?",
+                    type: "info",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                },
+                function(){
+                    ajaxCall("/createDoctorServlet",
+                            "docName="+readValue("docName")+
+                            '&docPhone='+readValue("docPhone")+
+                            '&docType='+readSelect("docType")
+                            +'&email='+readValue("email")+
+                            '&pwd='+readValue("pwd"),
+                            addDOctor);
+                });
+
+
     }
 
 </script>

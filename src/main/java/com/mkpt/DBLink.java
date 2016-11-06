@@ -18,8 +18,8 @@ public class DBLink {
     public static Connection getConnection(){
         errorMsg = new StringBuilder();
         try {
-//            return DriverManager.getConnection("jdbc:mysql://localhost/docChannel?" + "user=root&password=");
-            return DriverManager.getConnection("jdbc:mysql://127.10.148.2:3306/docvisit?" + "user=adminuKkWjhk&password=4djnF2fDCGmK");
+            return DriverManager.getConnection("jdbc:mysql://localhost/docChannel?" + "user=root&password=");
+//            return DriverManager.getConnection("jdbc:mysql://127.10.148.2:3306/docvisit?" + "user=adminuKkWjhk&password=4djnF2fDCGmK");
 
 
         } catch (SQLException e)
@@ -236,10 +236,14 @@ public class DBLink {
             return "Invalid Email or Password";
         }
         try {
+
+            java.util.Date date= new java.util.Date();
+            Timestamp now =new Timestamp(date.getTime());
+
             statement=connect.createStatement();
             connect = getConnection();
             preparedStatement = connect
-                    .prepareStatement("insert into  channel values ( ?,?,?,?,?,?,?,?,?)");
+                    .prepareStatement("insert into  channel values ( ?,?,?,?,?,?,?,?,?,?)");
 
             preparedStatement.setInt(1, ch.getID());
             preparedStatement.setInt(2, ch.getDocID());
@@ -252,6 +256,7 @@ public class DBLink {
             preparedStatement.setInt(7, 0);
             preparedStatement.setInt(8, ch.getMaxPatients());
             preparedStatement.setInt(9, 0);
+            preparedStatement.setTimestamp(10, now);
 
 
             preparedStatement.executeUpdate();

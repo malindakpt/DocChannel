@@ -147,7 +147,7 @@
         addElementsToSelect("docList",response,"Select a Doctor");
         addElementsToSelect("channelSessions","","Select Channelling Session");
         swal({
-            title: "Wait. . .",
+            title: "Done. . .",
             text: "",
             timer: 1,
             showConfirmButton: false

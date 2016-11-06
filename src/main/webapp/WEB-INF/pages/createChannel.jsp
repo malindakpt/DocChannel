@@ -84,6 +84,7 @@
         function processResponse(response){
             if(response==""){
                 swal("Done", "Channel session created", "success");
+//                window.location.href="/dashBoard";
             }else{
                 swal("Opps..", response, "error");
             }
@@ -91,15 +92,25 @@
 
 
         function createChannel(){
-            ajaxCall("/createChannelServlet",
-                    'hospital='+readSelect("hospital")+
-                    '&docId='+readSelect("doctor")+
-                    '&weekDay='+readSelect("weekDay")+
-                    '&time='+readValue("time")+
-                    '&max='+readValue("max")+
-                    '&email='+readValue("email")+
-                    '&pwd='+readValue("pwd")
-                    ,processResponse);
+            swal({
+                        title: "Creating New Session",
+                        text: "Are You Sure ?",
+                        type: "info",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true,
+                    },
+                    function(){
+                        ajaxCall("/createChannelServlet",
+                                'hospital='+readSelect("hospital")+
+                                '&docId='+readSelect("doctor")+
+                                '&weekDay='+readSelect("weekDay")+
+                                '&time='+readValue("time")+
+                                '&max='+readValue("max")+
+                                '&email='+readValue("email")+
+                                '&pwd='+readValue("pwd")
+                                ,processResponse);
+                    });
         }
 
 
