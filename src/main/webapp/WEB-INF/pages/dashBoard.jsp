@@ -14,11 +14,12 @@
 </head>
 <body>
 <div class="w3-container w3-green">
-    <h2>Dashboard</h2>
+    <h3>Dashboard  </h3>
+    <span style="font-size:100%;"><b>ONLINE </b>, current patient no. of your doctor</span>
 </div>
 <div>
             <span >
-                <p id="timeDiff" style="text-align: right;font-size:80%;">Select a doctor and channel session to view their status</p>
+                <p id="timeDiff" style="text-align: right;font-size:80%;">Select a Hospital, Doctor and Session to view their status</p>
             </span>
 </div>
 <div class="w3-container">
@@ -54,7 +55,7 @@
     <p>
     <p>
         <select id="channelSessions" class="w3-select" name="option" onchange="startUpdating()">
-            <option value="" disabled selected>Select Channelling Session</option>
+            <option value="" disabled selected>Select Session</option>
         </select></p>
     <p>
 
@@ -69,12 +70,12 @@
      function startUpdating(){
 
          clearInterval(updater);
-         setInnerHTML("timeDiff","wait . . .")
-         updater = setInterval(updateChannel, 60000);
+         setInnerHTML("timeDiff","wait . . .");
+         updateChannel();
+         updater = setInterval(updateChannel, 20000);
     }
 
  function updateChannel(){
-     console.log("upd");
      ajaxCall("/getChannelUpdateServlet",
              'channelId='+readSelect('channelSessions'),
              processChannelUpdate);

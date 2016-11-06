@@ -1,4 +1,26 @@
 
+.hideInMobile {
+    display: none;
+}
+
+.hideInDesktop {
+    display: block;
+}
+.logo {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+}
+.topic{
+    font-size: 35px;
+}
+.topic2{
+    font-size: 15px;
+}
+
+
+
+
 * {
     box-sizing: border-box;
 }
@@ -91,5 +113,23 @@ html {
         color: #000000;
         text-align: center;
         font-size: 70px;
+    }
+    .hideInMobile {
+        display: block;
+    }
+
+    .hideInDesktop {
+        display: none;
+    }
+    .logo {
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+    }
+    .topic{
+        font-size: 45px;
+    }
+    .topic2{
+        font-size: 20px;
     }
 }

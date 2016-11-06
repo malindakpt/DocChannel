@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/template.css">
     <link rel="stylesheet" type="text/css" href="css/w3css.css">
     <script src="js/sweetalert.min.js"></script>
@@ -17,14 +18,16 @@
 <body>
 
 <div class="header">
-    <h1>Chania</h1>
+    <span class="inlineMenu"><img class="logo"  src="img/logo1.png"/></span>
+    <span class="topic">docvisit   </span>
+    <span class="topic2">.lk</span>
 
 </div>
 
 <div class="row">
 
 
-    <div class="col-3 col-m-3 menu">
+    <div class="hideInMobile col-3 col-m-3 menu">
         <ul>
             <li>The Flight</li>
             <li>The City</li>
@@ -60,16 +63,8 @@
 
 
     <div class="col-3 col-m-12">
-        <p>
-        <ul class="w3-navbar w3-blue-grey">
-            <li><a href="/dashBoard">Dashboard</a></li>
-            <li><a href="/channelManager">Channel Manager</a></li>
-            <li><a href="/createDoctor">+ Doctor</a></li>
-            <li><a href="/createChannel">+ Channel</a></li>
-        </ul>
 
-        </p>
-        <div class="aside">
+        <div class="hideInMobile aside">
             <h2>What?</h2>
 
             <p>Chania is a city on the island of Crete.</p>
@@ -83,13 +78,23 @@
             <p>You can reach Chania airport from all over Europe.</p>
 
         </div>
+<br>
+        <div>
+            <ul class="w3-navbar w3-blue-grey">
+                <li><a href="/dashBoard">Dashboard</a></li>
+                <li><a href="/channelManager">Channel Manager</a></li>
+                <li><a href="/createDoctor">Add Doctor</a></li>
+                <li><a href="/createChannel">Add Channel</a></li>
+            </ul>
+
+        </div>
 
     </div>
 
 </div>
 
 <div class="footer">
-    <p>Resize the browser window to see how the content respond to the resizing.</p>
+    <p>Powered by MSOFT Software Solutions 2016</p>
 </div>
 
 <script>
