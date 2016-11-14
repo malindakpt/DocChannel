@@ -53,3 +53,13 @@ class CreateDoctorController {
 		return "index";
 	}
 }
+
+@Controller
+@RequestMapping("/error")
+class errorController {
+	@RequestMapping(method = RequestMethod.GET)
+	public String printWelcome(ModelMap model) {
+		model.addAttribute("page2", "createDoctor");
+		return "error";
+	}
+}

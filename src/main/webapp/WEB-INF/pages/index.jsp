@@ -41,6 +41,7 @@
     <div class="col-6 col-m-9">
         <div>
 
+            <%try{%>
             <% String s = (String) request.getAttribute("page2");
                 if ("channelManager".equals(s)) {%>
             <jsp:include page='channelManager.jsp'/>
@@ -55,7 +56,12 @@
             <%} else {%>
             <jsp:include page='dashBoard.jsp'/>
             <%}%>
-
+            <%}catch (Exception e){%>
+            <jsp:include page='error.jsp'/>
+            <%--<script>--%>
+                <%--window.location.href='/error?msg=DBL001'--%>
+            <%--</script>--%>
+            <%}%>
         </div>
 
 
@@ -157,5 +163,7 @@
         select.selectedIndex=0;
     }
 </script>
+
+
 </body>
 </html>
