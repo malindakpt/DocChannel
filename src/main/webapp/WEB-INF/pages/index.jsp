@@ -18,7 +18,7 @@
 <body>
 
 <div class="header">
-    <span class="inlineMenu"><img class="logo"  src="img/logo1.png"/></span>
+    <span class="inlineMenu"><img class="logo" src="img/logo1.png"/></span>
     <span class="topic">docvisit   </span>
     <span class="topic2">.lk</span>
 
@@ -41,7 +41,7 @@
     <div class="col-6 col-m-9">
         <div>
 
-            <%try{%>
+            <%try {%>
             <% String s = (String) request.getAttribute("page2");
                 if ("channelManager".equals(s)) {%>
             <jsp:include page='channelManager.jsp'/>
@@ -56,11 +56,8 @@
             <%} else {%>
             <jsp:include page='dashBoard.jsp'/>
             <%}%>
-            <%}catch (Exception e){%>
-            <jsp:include page='error.jsp'/>
-            <%--<script>--%>
-                <%--window.location.href='/error?msg=DBL001'--%>
-            <%--</script>--%>
+            <%} catch (Exception e) {%>
+            <jsp:include page='error.jsp?msg=DBL001'/>
             <%}%>
         </div>
 
@@ -84,7 +81,8 @@
             <p>You can reach Chania airport from all over Europe.</p>
 
         </div>
-<br>
+        <br>
+
         <div>
             <ul class="w3-navbar w3-blue-grey">
                 <li><a href="/dashBoard">Dashboard</a></li>
@@ -105,11 +103,11 @@
 
 <script>
 
-    function readValue(object){
+    function readValue(object) {
         return document.getElementById(object).value;
     }
-    function writeValue(object,value){
-        document.getElementById(object).value=value;
+    function writeValue(object, value) {
+        document.getElementById(object).value = value;
     }
     function readSelect(object) {
         var e = document.getElementById(object);
@@ -118,13 +116,13 @@
     function readInnerHTML(object) {
         return document.getElementById(object).innerHTML;
     }
-    function setInnerHTML(object,value) {
-        return document.getElementById(object).innerHTML=value;
+    function setInnerHTML(object, value) {
+        return document.getElementById(object).innerHTML = value;
     }
 
-    function ajaxCall(servlet,parameters,callBackfn) {
+    function ajaxCall(servlet, parameters, callBackfn) {
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
+        xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 callBackfn(this.responseText);
             }
@@ -134,7 +132,7 @@
         xhttp.send(parameters);
     }
 
-    function addElementsToSelect(object,list,defaultVal){
+    function addElementsToSelect(object, list, defaultVal) {
 
         var select = document.getElementById(object);
         select.innerHTML = "";
@@ -149,7 +147,7 @@
 
         docList.forEach(function (item, index) {
             try {
-                if(index>0) {
+                if (index > 0) {
                     var opt = document.createElement("option");
                     opt.value = item.split("#")[0];
                     opt.textContent = item.split("#")[1];
@@ -160,7 +158,7 @@
             }
         });
 
-        select.selectedIndex=0;
+        select.selectedIndex = 0;
     }
 </script>
 
