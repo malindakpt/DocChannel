@@ -62,9 +62,15 @@ html {
     font-size: 70px;
 }
 .aside {
-    background-color: #33b5e5;
-    padding: 15px;
-    color: #ffffff;
+     background-color:   #0099cc;
+     padding: 15px;
+     color: #ffffff;
+     text-align: center;
+     font-size: 14px;
+     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+ }
+.aside2 {
+
     text-align: center;
     font-size: 14px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);

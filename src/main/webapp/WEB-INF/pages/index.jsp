@@ -27,14 +27,28 @@
 <div class="row">
 
 
-    <div class="hideInMobile col-3 col-m-3 menu">
-        <ul>
-            <li>The Flight</li>
-            <li>The City</li>
-            <li>The Island</li>
-            <li>The Food</li>
-        </ul>
+    <div class="hideInMobile col-3 col-m-3">
 
+        <div class=" aside">
+            <br><br>
+
+            <h2>Don't waste your time at channeling centers</h2>
+            <br>
+
+            <p>NOW you can, Reach the channeling center on time</p>
+
+            <h3>Wait at home until your number calls</h3>
+
+
+            <p>You will be assisted by...</p>
+            <br>
+
+            <h2>docvisit.lk</h2>
+
+            <h4>Automated Patient Assistant</h4>
+            <br>
+
+        </div>
 
     </div>
 
@@ -68,27 +82,50 @@
     <div class="col-3 col-m-12">
 
         <div class="hideInMobile aside">
-            <h2>What?</h2>
 
-            <p>Chania is a city on the island of Crete.</p>
+            <br><br>
 
-            <h2>Where?</h2>
+            <h1>Its easy, 3 Steps</h1>
 
-            <p>Crete is a Greek island in the Mediterranean Sea.</p>
+            <br>
 
-            <h2>How?</h2>
+            <h3>Select a Hospital</h3>
 
-            <p>You can reach Chania airport from all over Europe.</p>
+            <h3>Select a Doctor</h3>
+
+            <h3>Select a channeling session</h3>
+
+            <p>You can view current patient number online from mobile</p>
+
 
         </div>
+
+        <%--<div class="hideInMobile col-3 col-m-3 menu">--%>
+        <%--<ul>--%>
+        <%--<li>The Flight</li>--%>
+        <%--<li>The City</li>--%>
+        <%--<li>The Island</li>--%>
+        <%--<li>The Food</li>--%>
+        <%--</ul>--%>
+
+
+        <%--</div>--%>
         <br>
 
-        <div>
-            <ul class="w3-navbar w3-blue-grey">
-                <li><a href="/dashBoard">Dashboard</a></li>
-                <li><a href="/channelManager">Channel Manager</a></li>
-                <li><a href="/createDoctor">Add Doctor</a></li>
-                <li><a href="/createChannel">Add Channel</a></li>
+        <div class="hideInMobile aside2 menu">
+            <ul>
+                <a href="/dashBoard">
+                    <li>Dashboard</li>
+                </a>
+                <a href="/channelManager">
+                    <li>Channel Manager</li>
+                </a>
+                <a href="/createDoctor">
+                    <li>Add Doctor</li>
+                </a>
+                <a href="/createChannel">
+                    <li>Add Channel</li>
+                </a>
             </ul>
 
         </div>
