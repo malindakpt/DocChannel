@@ -1,5 +1,9 @@
 package com.mkpt;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +92,66 @@ public class DBLink {
             return null;
         }
         return types;
+    }
+    public static int getAdCountHospt(int hospID){
+
+        try {
+            connect = getConnection();
+            statement = connect.createStatement();
+            //   resultSet = statement.executeQuery("select channel.id,channel.weekDay, channel.time  from channel INNER JOIN doctors ON channel.docId=doctors.id where hospitalId=" + hosptId + " and docId=" + docId);
+            resultSet = statement.executeQuery("select noOfAds  from hospitals  where id="+hospID);
+
+            while (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            return -1;
+        }
+        return -1;
+    }
+
+    //JSON implementation
+    public static JSONArray getAdPhotosHospt(int hospID){
+        JSONArray photos = new JSONArray();
+        try {
+            connect = getConnection();
+            statement = connect.createStatement();
+            //   resultSet = statement.executeQuery("select channel.id,channel.weekDay, channel.time  from channel INNER JOIN doctors ON channel.docId=doctors.id where hospitalId=" + hosptId + " and docId=" + docId);
+            resultSet = statement.executeQuery("select adID,photo  from ads  where hosptID="+hospID);
+
+            while (resultSet.next()) {
+                JSONObject photo = new JSONObject();
+                photo.put(Cnst.PHOTO, Base64.encode(resultSet.getBytes("photo")));
+                photos.add(photo);
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            return null;
+        }
+        return photos;
+    }
+
+    //JSON implementation
+    public static JSONArray getHospitalsForAds(){
+        JSONArray hospitals = new JSONArray();
+        try {
+            connect = getConnection();
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("select * from hospitals");
+
+            while (resultSet.next()) {
+                JSONObject hospt = new JSONObject();
+                hospt.put(Cnst.HOSPT_ID,resultSet.getString(1));
+                hospt.put(Cnst.HOSPT_NAME,resultSet.getString(2));
+                hospt.put(Cnst.HOSPT_NO_OF_ADS, resultSet.getString("noOfAds"));
+                hospitals.add(hospt);
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            return null;
+        }
+        return hospitals;
     }
 
     public static String getDoctorsOfHospitals(int hosptId){

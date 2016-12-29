@@ -15,6 +15,16 @@ public class IndexController {
 }
 
 @Controller
+@RequestMapping("/loadAds")
+class LoadAdsController {
+	@RequestMapping(method = RequestMethod.GET)
+	public String printWelcome(ModelMap model) {
+		model.addAttribute("page2", "loadAds");
+		return "index";
+	}
+}
+
+@Controller
  @RequestMapping("/channelManager")
  class ChannelManagerController {
 	@RequestMapping(method = RequestMethod.GET)

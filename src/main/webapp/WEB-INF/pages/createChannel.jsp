@@ -119,9 +119,6 @@
             var type = e.options[e.selectedIndex].value.split("#")[1];
             writeValue("docType",type);
         }
-
-
-
     </script>
 
 </div>

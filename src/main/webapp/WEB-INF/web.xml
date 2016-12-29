@@ -15,6 +15,14 @@
 		<url-pattern>/getChannelUpdateServlet</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>loadAdPhotosServlet</servlet-name>
+		<servlet-class>com.servlet.loadAdPhotosServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>loadAdPhotosServlet</servlet-name>
+		<url-pattern>/loadAdPhotosServlet</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>setChannelCountServlet</servlet-name>

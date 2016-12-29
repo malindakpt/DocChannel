@@ -19,6 +19,7 @@
     <span style="font-size:100%;"><b>ONLINE </b>, current patient no. of your doctor</span>
 </div>
 <div>
+    <img src="http://prettygoodplan.com/wp-content/uploads/2011/07/Advertising.jpg" style="width: 100%; height: 100px" />
             <span>
                 <p id="timeDiff" style="text-align: right;font-size:80%;">Select a Hospital, Doctor and Session to view
                     their status</p>
