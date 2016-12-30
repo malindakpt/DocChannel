@@ -155,27 +155,31 @@
             var ctx = canvas.getContext("2d");
             var oWidth=img.width;
             var oHeight=img.height;
-
-            if(oWidth>oHeight){
-
-                if(oWidth>600){
-                    canvas.width = 600;
-                }else{
-                    canvas.width = oWidth;
-                }
-                canvas.height = canvas.width*oHeight/oWidth;
-
-            }else{
-                if(oHeight>450){
-                    canvas.height = 450;
-                }else{
-                    canvas.height = oHeight;
-                }
-                canvas.width = canvas.height*oWidth/oHeight;
-            }
+            var expWidth=10;
+            var expHeight=10;
+//
+//            if(oWidth>oHeight){
+//
+//                if(oWidth>expWidth){
+//                    canvas.width = expWidth;
+//                }else{
+//                    canvas.width = oWidth;
+//                }
+//                canvas.height = canvas.width*oHeight/oWidth;
+//
+//            }else{
+//                if(oHeight>expHeight){
+//                    canvas.height = expHeight;
+//                }else{
+//                    canvas.height = oHeight;
+//                }
+//                canvas.width = canvas.height*oWidth/oHeight;
+//            }
+            canvas.height = 50;
+            canvas.width = 50;
 
             ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-            document.getElementById("prev" + window.idx).src = canvas.toDataURL();
+ //           document.getElementById("prev" + window.idx).src = canvas.toDataURL();
 
             if (window.idx === 0) {
                 img0 = canvas.toDataURL();
@@ -214,6 +218,7 @@
         var e = document.getElementById(object);
         return e.options[e.selectedIndex].value.split("#")[0];
     }
+
     function readSelectData(object,prop) {
         var e = document.getElementById(object);
         return e.options[e.selectedIndex].dataset[prop];

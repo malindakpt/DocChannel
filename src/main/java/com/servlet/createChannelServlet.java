@@ -37,7 +37,7 @@ public class createChannelServlet extends HttpServlet {
         ch.setMaxPatients(max);
 
 
-        String result= DBLink.addChannel(ch, email, pwd);
+        String result= DBLink.addChannel(ch, email, pwd,hospitalId);
         if(result!=null){
             resp.println(result);
         }

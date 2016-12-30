@@ -29,7 +29,7 @@
     </p>
     </p>
     <p>
-        <select id="hospital" class="w3-select" name="option" onchange="setDoctors()">
+        <select id="CMhospitals" class="w3-select" name="option" onchange="setDoctors()">
             <option value="" disabled selected>Select a Hospital</option>
             <%List<String> hospitals = DBLink.getHospitals();%>
             <%for (int i = 0; i < hospitals.size(); i++) {%>
@@ -37,7 +37,7 @@
                 String id = hospitals.get(i).split("#")[0];
                 String hosp = hospitals.get(i).split("#")[1];
             %>
-            <option value="<%=id%>"><%=hosp%>
+            <option data-hosptid="<%=id%>" value="<%=id%>"><%=hosp%>
             </option>
             <%}%>
         </select>
@@ -88,6 +88,7 @@
                     ajaxCall("/setChannelCountServlet",
                             'email=' + readValue('email')
                             + '&pwd=' + readValue('pwd')
+                            + '&hosptID=' + readSelectData('CMhospitals','hosptid')
                             + '&channelId=' + readSelect('channelSessions')
                             + '&patientNo=' + count,
 

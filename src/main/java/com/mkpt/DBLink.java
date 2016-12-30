@@ -42,6 +42,50 @@ public class DBLink {
             e.printStackTrace();
         }
     }
+
+    public static String getImage(int hosptID,String img) throws SQLException {
+        errorMsg = new StringBuilder();
+        String attribute="img"+img;
+
+        connect = getConnection();
+        statement=connect.createStatement();
+        resultSet = statement.executeQuery("select "+attribute+" from ads where hosptID="+hosptID);
+        while (resultSet.next()) {
+            // imageS = Base64.encode(resultSet.getBytes(attribute));
+            return resultSet.getString(attribute);
+        }
+        return null;
+    }
+
+    public static String adImages(int hosptID,Advertisement ad,String email,String pwd){
+        errorMsg = new StringBuilder();
+        if(!validateUser(email,pwd,hosptID)){
+            return "Invalid Email or Password";
+        }
+        try {
+            statement=connect.createStatement();
+            connect = getConnection();
+            preparedStatement = connect
+                    .prepareStatement("insert into  ads values ( ?, ?,?,?,?)");
+
+            preparedStatement.setInt(1, hosptID);
+            preparedStatement.setBlob(2, ad.getImg0());
+            preparedStatement.setBlob(3, ad.getImg1());
+            preparedStatement.setBlob(4, ad.getImg2());
+            preparedStatement.setBlob(5, ad.getImg3());
+
+
+
+            preparedStatement.executeUpdate();
+
+            return null;
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            e.printStackTrace();
+            return e.getMessage();
+        }
+
+    }
     public static List<String> getTypes(){
         List<String> types=new ArrayList<String>();
         try {
@@ -228,8 +272,11 @@ public class DBLink {
         return list;
     }
 
-    public static boolean validateUser(String email,String pwd){
+    public static boolean validateUserAdmin(String email,String pwd){
 
+        if(!email.equals("malinda")){
+            return false;
+        }
         try {
             connect = getConnection();
             statement = connect.createStatement();
@@ -244,10 +291,26 @@ public class DBLink {
         }
         return false;
     }
+    public static boolean validateUser(String email,String pwd,int hosptID){
 
-    public static String setChannelCount(int channelId,int count, String email, String pwd){
+        try {
+            connect = getConnection();
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("select * from users where email='" + email+"' and pwd='"+pwd+"' and hospitalID="+hosptID);
+
+            if (resultSet.next()) {
+                return true;
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            return false;
+        }
+        return false;
+    }
+
+    public static String setChannelCount(int channelId,int count, String email, String pwd,int hosptID){
         errorMsg = new StringBuilder();
-        if(!validateUser(email,pwd)){
+        if(!validateUser(email,pwd,hosptID)){
             return "Invalid Email or Password";
         }
         try {
@@ -270,7 +333,7 @@ public class DBLink {
 
     public static String addDoctor(Doctor doc, String email, String pwd){
         errorMsg = new StringBuilder();
-        if(!validateUser(email,pwd)){
+        if(!validateUserAdmin(email, pwd)){
             return "Invalid Email or Password";
         }
         try {
@@ -294,9 +357,9 @@ public class DBLink {
             return e.getMessage();
         }
     }
-    public static String addChannel(Channel  ch, String email, String pwd){
+    public static String addChannel(Channel  ch, String email, String pwd,int hosptID){
         errorMsg = new StringBuilder();
-        if(!validateUser(email,pwd)){
+        if(!validateUser(email,pwd,hosptID)){
             return "Invalid Email or Password";
         }
         try {

@@ -20,11 +20,12 @@ public class setChannelCountServlet extends HttpServlet {
 
         int channelId= Integer.parseInt(request.getParameter("channelId"));
         int patientNo= Integer.parseInt(request.getParameter("patientNo"));
+        int hosptID= Integer.parseInt(request.getParameter("hosptID"));
 
         String email= request.getParameter("email");
         String pwd= request.getParameter("pwd");
 
-        String result = DBLink.setChannelCount(channelId,patientNo,email,pwd);
+        String result = DBLink.setChannelCount(channelId,patientNo,email,pwd,hosptID);
 
         resp.print(result);
     }

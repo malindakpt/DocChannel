@@ -19,7 +19,7 @@
     <span style="font-size:100%;"><b>ONLINE </b>, current patient no. of your doctor</span>
 </div>
 <div>
-    <img src="http://prettygoodplan.com/wp-content/uploads/2011/07/Advertising.jpg" style="width: 100%; height: 100px" />
+    <img id="ads" src="http://prettygoodplan.com/wp-content/uploads/2011/07/Advertising.jpg" style="width: 100%; height: 100px" />
             <span>
                 <p id="timeDiff" style="text-align: right;font-size:80%;">Select a Hospital, Doctor and Session to view
                     their status</p>
@@ -78,6 +78,7 @@
 
 
 <script>
+
     var updater;
     function startUpdating() {
 
@@ -148,6 +149,48 @@
             showConfirmButton: false
         });
     }
+
+    function loadImage(n,hosptID) {
+        ajaxCall("/ImageDownloadServlet","img="+n+"&hosptID="+hosptID,
+                processImgResponse);
+    }
+
+    function processImgResponse(result){
+        if (result.startsWith("null")) {
+            document.getElementById("ads").src = "img/noImage.JPG";
+        } else {
+            document.getElementById("ads").src = result;
+//            var image = document.getElementById("ads");
+//            gWidth = image.width ;
+//            gHeight = image.height;
+//
+//            var tempImg = document.createElement('img');
+//
+//            tempImg.addEventListener('load', function() {
+//                image.src = result;
+//
+//                if(gWidth>tempImg.width ) {
+//                    image.style.left =  (gWidth-tempImg.width)/2+"px";
+//                    image.style.top =   (gHeight-tempImg.height)/2+"px";
+//                    image.style.width = tempImg.width + "px";
+//                    image.style.height = tempImg.height + "px";
+//                }else{
+//                    image.style.left =  0+"px";
+//                    image.style.top =   0+"px";
+//                    image.style.width = gWidth+ "px";
+//                    image.style.height =  tempImg.height*gWidth/tempImg.width + "px";
+//                }
+//            });
+//            tempImg.src = result;
+        }
+//        loadDone0=true;
+//                load1image1();
+    }
+
+
+    window.onload = function() {
+        loadImage(0,1);
+    };
 
 </script>
 </html>

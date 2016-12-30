@@ -20,7 +20,7 @@
 </div>
 
 <p>
-    <select id="LAhospital" class="w3-select" name="option" onchange="loadAdPhotos()">
+    <select id="LAhospital" class="w3-select" name="option">
         <option value="" disabled selected>Select a Hospital</option>
         <% JSONArray hospitals = DBLink.getHospitalsForAds();
             for (int i = 0; i < hospitals.size(); i++) {
@@ -29,14 +29,14 @@
                 String name = (String) hospt.get(Cnst.HOSPT_NAME);
                 String adCount = (String) hospt.get(Cnst.HOSPT_NO_OF_ADS);
         %>
-        <option data-adcount="<%=adCount%>" id="opt<%=id%>"><%=name%>
+        <option data-adcount="<%=adCount%>" data-hosptid="<%=id%>" id="opt<%=id%>"><%=name%>
         </option>
         <%}%>
     </select>
 </p>
 <p>
         <%
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
     %>
 
 <p><input id="img<%=i%>" class="w3-input" type="file" onchange="loadImageFile(<%=i%>)">
@@ -63,10 +63,11 @@
                 },
                 function(){
                     ajaxCall("/loadAdPhotosServlet",
-                            'photo0='+img0+
-                            '&photo1='+img1+
-                            '&photo2='+img2+
-                            '&photo3='+img3+
+                            'hosptID='+readSelectData('LAhospital','hosptid')+
+                            '&img0='+img0+
+                            '&img1='+img1+
+                            '&img2='+img2+
+//                            '&img3='+img3+
                             '&email='+readValue("email")+
                             '&pwd='+readValue("pwd")
                             ,processResponse);

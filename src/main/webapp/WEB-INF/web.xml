@@ -16,6 +16,15 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>ImageDownloadServlet</servlet-name>
+		<servlet-class>com.servlet.ImageDownloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ImageDownloadServlet</servlet-name>
+		<url-pattern>/ImageDownloadServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>loadAdPhotosServlet</servlet-name>
 		<servlet-class>com.servlet.loadAdPhotosServlet</servlet-class>
 	</servlet>
