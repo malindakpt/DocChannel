@@ -28,13 +28,10 @@ public class loadAdPhotosServlet extends HttpServlet {
 
         Advertisement ad=new Advertisement();
         try { ad.setImg0(IOUtils.toInputStream(request.getParameter("img0").replaceAll(" ","+"), "UTF-8")); }catch (Exception e){}
-        try { ad.setImg1(IOUtils.toInputStream(request.getParameter("img1"), "UTF-8")); }catch (Exception e){}
-        try { ad.setImg2(IOUtils.toInputStream(request.getParameter("img2"), "UTF-8")); }catch (Exception e){}
+        try { ad.setImg1(IOUtils.toInputStream(request.getParameter("img1").replaceAll(" ", "+"), "UTF-8")); }catch (Exception e){}
+        try { ad.setImg2(IOUtils.toInputStream(request.getParameter("img2").replaceAll(" ","+"), "UTF-8")); }catch (Exception e){}
 //        try { ad.setImg3(IOUtils.toInputStream(request.getParameter("img3"), "UTF-8")); }catch (Exception e){}
 
-        System.out.println("\n");
-        System.out.println(request.getParameter("img0"));
-        System.out.println("\n");
 
         String res = DBLink.adImages(hosptID,ad,email,pwd);
         if(res!=null){

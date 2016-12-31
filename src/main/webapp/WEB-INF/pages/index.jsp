@@ -155,31 +155,31 @@
             var ctx = canvas.getContext("2d");
             var oWidth=img.width;
             var oHeight=img.height;
-            var expWidth=10;
-            var expHeight=10;
-//
-//            if(oWidth>oHeight){
-//
-//                if(oWidth>expWidth){
-//                    canvas.width = expWidth;
-//                }else{
-//                    canvas.width = oWidth;
-//                }
-//                canvas.height = canvas.width*oHeight/oWidth;
-//
-//            }else{
-//                if(oHeight>expHeight){
-//                    canvas.height = expHeight;
-//                }else{
-//                    canvas.height = oHeight;
-//                }
-//                canvas.width = canvas.height*oWidth/oHeight;
-//            }
-            canvas.height = 50;
-            canvas.width = 50;
+            var expWidth=650;
+            var expHeight=100;
+
+            if(oWidth>oHeight){
+
+                if(oWidth>expWidth){
+                    canvas.width = expWidth;
+                }else{
+                    canvas.width = oWidth;
+                }
+                canvas.height = canvas.width*oHeight/oWidth;
+
+            }else{
+                if(oHeight>expHeight){
+                    canvas.height = expHeight;
+                }else{
+                    canvas.height = oHeight;
+                }
+                canvas.width = canvas.height*oWidth/oHeight;
+            }
+//            canvas.height = 50;
+//            canvas.width = 50;
 
             ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
- //           document.getElementById("prev" + window.idx).src = canvas.toDataURL();
+            document.getElementById("prev" + window.idx).src = canvas.toDataURL();
 
             if (window.idx === 0) {
                 img0 = canvas.toDataURL();

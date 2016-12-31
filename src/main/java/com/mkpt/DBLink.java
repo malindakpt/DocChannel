@@ -14,7 +14,7 @@ import java.util.List;
 public class DBLink {
 
     public  static StringBuilder errorMsg = new StringBuilder();
-    private  static Connection connect = null;
+    private  static Connection connection = null;
     private  static Statement statement = null;
     private  static PreparedStatement preparedStatement = null;
     private  static ResultSet resultSet = null;
@@ -22,34 +22,47 @@ public class DBLink {
     public static Connection getConnection(){
         errorMsg = new StringBuilder();
         try {
-            return DriverManager.getConnection("jdbc:mysql://localhost/docChannel?" + "user=root&password=");
+            Class.forName("com.mysql.jdbc.Driver");
+            if(connection==null || connection.isClosed()) {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/docChannel?" + "user=root&password=");
+            }
 //            return DriverManager.getConnection("jdbc:mysql://127.10.148.2:3306/docvisit?" + "user=adminuKkWjhk&password=4djnF2fDCGmK");
+           return connection;
 
-
-        } catch (SQLException e)
+        } catch (Exception e)
         {
             errorMsg.append(e.getMessage());
             return null;
         }
     }
 
-    static {
+    public static void closeConnection(){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connect = getConnection();
-        }catch (Exception e){
-            errorMsg.append(e.getMessage());
+            System.out.println("close connection");
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
+
+//    static {
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            connect = getConnection();
+//        }catch (Exception e){
+//            errorMsg.append(e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
 
     public static String getImage(int hosptID,String img) throws SQLException {
         errorMsg = new StringBuilder();
         String attribute="img"+img;
 
-        connect = getConnection();
-        statement=connect.createStatement();
-        resultSet = statement.executeQuery("select "+attribute+" from ads where hosptID="+hosptID);
+        statement=getConnection().createStatement();
+        resultSet = statement.executeQuery("select "+attribute+" from hospitals where id="+hosptID);
         while (resultSet.next()) {
             // imageS = Base64.encode(resultSet.getBytes(attribute));
             return resultSet.getString(attribute);
@@ -63,16 +76,16 @@ public class DBLink {
             return "Invalid Email or Password";
         }
         try {
-            statement=connect.createStatement();
-            connect = getConnection();
-            preparedStatement = connect
-                    .prepareStatement("insert into  ads values ( ?, ?,?,?,?)");
 
-            preparedStatement.setInt(1, hosptID);
-            preparedStatement.setBlob(2, ad.getImg0());
-            preparedStatement.setBlob(3, ad.getImg1());
-            preparedStatement.setBlob(4, ad.getImg2());
-            preparedStatement.setBlob(5, ad.getImg3());
+            preparedStatement = getConnection()
+                    .prepareStatement("UPDATE hospitals SET  img0=? , img1=? , img2= ? WHERE id = ?");
+
+
+            preparedStatement.setBlob(1, ad.getImg0());
+            preparedStatement.setBlob(2, ad.getImg1());
+            preparedStatement.setBlob(3, ad.getImg2());
+            preparedStatement.setInt(4, hosptID);
+
 
 
 
@@ -89,8 +102,8 @@ public class DBLink {
     public static List<String> getTypes(){
         List<String> types=new ArrayList<String>();
         try {
-            connect = getConnection();
-            statement = connect.createStatement();
+
+            statement = getConnection().createStatement();
             resultSet = statement.executeQuery("select * from types");
 
 
@@ -107,8 +120,8 @@ public class DBLink {
     public static List<String> getDoctors(){
         List<String> types=new ArrayList<String>();
         try {
-            connect = getConnection();
-            statement = connect.createStatement();
+
+            statement = getConnection().createStatement();
             resultSet = statement.executeQuery("select doctors.id,doctors.name,types.caption from doctors INNER JOIN types ON doctors.type=types.id");
 
             while (resultSet.next()) {
@@ -123,8 +136,8 @@ public class DBLink {
     public static List<String> getHospitals(){
         List<String> types=new ArrayList<String>();
         try {
-            connect = getConnection();
-            statement = connect.createStatement();
+
+            statement = getConnection().createStatement();
             resultSet = statement.executeQuery("select * from hospitals");
 
 
@@ -140,8 +153,8 @@ public class DBLink {
     public static int getAdCountHospt(int hospID){
 
         try {
-            connect = getConnection();
-            statement = connect.createStatement();
+
+            statement = getConnection().createStatement();
             //   resultSet = statement.executeQuery("select channel.id,channel.weekDay, channel.time  from channel INNER JOIN doctors ON channel.docId=doctors.id where hospitalId=" + hosptId + " and docId=" + docId);
             resultSet = statement.executeQuery("select noOfAds  from hospitals  where id="+hospID);
 
@@ -159,10 +172,10 @@ public class DBLink {
     public static JSONArray getAdPhotosHospt(int hospID){
         JSONArray photos = new JSONArray();
         try {
-            connect = getConnection();
-            statement = connect.createStatement();
+
+            statement = getConnection().createStatement();
             //   resultSet = statement.executeQuery("select channel.id,channel.weekDay, channel.time  from channel INNER JOIN doctors ON channel.docId=doctors.id where hospitalId=" + hosptId + " and docId=" + docId);
-            resultSet = statement.executeQuery("select adID,photo  from ads  where hosptID="+hospID);
+            resultSet = statement.executeQuery("select adID,photo  from hospitals  where id="+hospID);
 
             while (resultSet.next()) {
                 JSONObject photo = new JSONObject();
@@ -180,8 +193,8 @@ public class DBLink {
     public static JSONArray getHospitalsForAds(){
         JSONArray hospitals = new JSONArray();
         try {
-            connect = getConnection();
-            statement = connect.createStatement();
+
+            statement = getConnection().createStatement();
             resultSet = statement.executeQuery("select * from hospitals");
 
             while (resultSet.next()) {
@@ -201,8 +214,8 @@ public class DBLink {
     public static String getDoctorsOfHospitals(int hosptId){
         String list="";
         try {
-            connect = getConnection();
-            statement = connect.createStatement();
+
+            statement = getConnection().createStatement();
             resultSet = statement.executeQuery("select doctors.id,doctors.name from channel INNER JOIN doctors ON channel.docId=doctors.id where hospitalId="+hosptId);
 
 
@@ -218,8 +231,8 @@ public class DBLink {
 
     public static String getChannelUpdate(int id){
         try {
-            connect = getConnection();
-            statement = connect.createStatement();
+
+            statement = getConnection().createStatement();
             resultSet = statement.executeQuery("select patientNo,lastUpdated  from channel  where id="+id);
 
             java.util.Date date= new java.util.Date();
@@ -257,8 +270,8 @@ public class DBLink {
     public static String getChannelSessions(int hosptId,int docId){
         String list="";
         try {
-            connect = getConnection();
-            statement = connect.createStatement();
+
+            statement = getConnection().createStatement();
          //   resultSet = statement.executeQuery("select channel.id,channel.weekDay, channel.time  from channel INNER JOIN doctors ON channel.docId=doctors.id where hospitalId=" + hosptId + " and docId=" + docId);
             resultSet = statement.executeQuery("select channel.id,channel.weekDay, channel.time  from channel  where hospitalId="+hosptId+" and docId="+docId);
 
@@ -278,8 +291,8 @@ public class DBLink {
             return false;
         }
         try {
-            connect = getConnection();
-            statement = connect.createStatement();
+
+            statement = getConnection().createStatement();
             resultSet = statement.executeQuery("select * from users where email='" + email+"' and pwd='"+pwd+"'");
 
             if (resultSet.next()) {
@@ -294,8 +307,8 @@ public class DBLink {
     public static boolean validateUser(String email,String pwd,int hosptID){
 
         try {
-            connect = getConnection();
-            statement = connect.createStatement();
+
+            statement = getConnection().createStatement();
             resultSet = statement.executeQuery("select * from users where email='" + email+"' and pwd='"+pwd+"' and hospitalID="+hosptID);
 
             if (resultSet.next()) {
@@ -316,10 +329,9 @@ public class DBLink {
         try {
             java.util.Date date= new java.util.Date();
             Timestamp now =new Timestamp(date.getTime());
-            statement=connect.createStatement();
-            connect = getConnection();
-            preparedStatement = connect
-                    .prepareStatement("update channel set patientNo="+count+",lastUpdated='"+now+"' where id="+channelId);
+
+            preparedStatement = getConnection()
+                    .prepareStatement("update channel set patientNo=" + count + ",lastUpdated='" + now + "' where id=" + channelId);
 
             preparedStatement.executeUpdate();
 
@@ -337,9 +349,8 @@ public class DBLink {
             return "Invalid Email or Password";
         }
         try {
-            statement=connect.createStatement();
-            connect = getConnection();
-            preparedStatement = connect
+
+            preparedStatement = getConnection()
                     .prepareStatement("insert into  doctors values ( ?, ?,?,?)");
 
             preparedStatement.setInt(1, doc.getID());
@@ -367,9 +378,8 @@ public class DBLink {
             java.util.Date date= new java.util.Date();
             Timestamp now =new Timestamp(date.getTime());
 
-            statement=connect.createStatement();
-            connect = getConnection();
-            preparedStatement = connect
+
+            preparedStatement = getConnection()
                     .prepareStatement("insert into  channel values ( ?,?,?,?,?,?,?,?,?,?)");
 
             preparedStatement.setInt(1, ch.getID());

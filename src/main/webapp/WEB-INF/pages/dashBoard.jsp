@@ -19,7 +19,7 @@
     <span style="font-size:100%;"><b>ONLINE </b>, current patient no. of your doctor</span>
 </div>
 <div>
-    <img id="ads" src="http://prettygoodplan.com/wp-content/uploads/2011/07/Advertising.jpg" style="width: 100%; height: 100px" />
+    <img id="ads" src="http://prettygoodplan.com/wp-content/uploads/2011/07/Advertising.jpg" style="max-width: 100%; height: 100px" />
             <span>
                 <p id="timeDiff" style="text-align: right;font-size:80%;">Select a Hospital, Doctor and Session to view
                     their status</p>
@@ -39,7 +39,7 @@
     </p>
     </p>
     <p>
-        <select id="hospital" class="w3-select" name="option" onchange="setDoctors()">
+        <select id="DBhospital" class="w3-select" name="option" onchange="setDoctors()">
             <option value="" disabled selected>Select a Hospital</option>
             <%List<String> hospitals = DBLink.getHospitals();%>
             <%for (int i = 0; i < hospitals.size(); i++) {%>
@@ -47,7 +47,7 @@
                 String id = hospitals.get(i).split("#")[0];
                 String hosp = hospitals.get(i).split("#")[1];
             %>
-            <option value="<%=id%>"><%=hosp%>
+            <option data-hosptid="<%=id%>" value="<%=id%>"><%=hosp%>
             </option>
             <%}%>
         </select>
@@ -110,7 +110,7 @@
             timer: 20000,
             showConfirmButton: false
         });
-        var hospId = readSelect("hospital");
+        var hospId = readSelect("DBhospital");
         var docId = readSelect("docList");
         ajaxCall("/getChannelSessionsServlet",
                 'hospId=' + hospId +
@@ -135,7 +135,7 @@
             timer: 20000,
             showConfirmButton: false
         });
-        var hospId = readSelect("hospital");
+        var hospId = readSelect("DBhospital");
         ajaxCall("/getDoctorListOfHospitalServlet",
                 'hospId=' + hospId, processResponse);
     }
@@ -150,9 +150,18 @@
         });
     }
 
-    function loadImage(n,hosptID) {
-        ajaxCall("/ImageDownloadServlet","img="+n+"&hosptID="+hosptID,
-                processImgResponse);
+    var n=Math.round(Math.random()*10)%3;
+
+    function loadImage() {
+        var hosptID = readSelectData('DBhospital','hosptid');
+        if(hosptID) {
+            n = n + 1;
+            if (n > 2) {
+                n = 0;
+            }
+            ajaxCall("/ImageDownloadServlet", "img=" + n + "&hosptID=" + hosptID,
+                    processImgResponse);
+        }
     }
 
     function processImgResponse(result){
@@ -189,7 +198,8 @@
 
 
     window.onload = function() {
-        loadImage(0,1);
+        setInterval(loadImage,500);
+//        loadImage();
     };
 
 </script>

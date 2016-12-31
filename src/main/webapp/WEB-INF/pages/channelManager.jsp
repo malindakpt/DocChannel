@@ -118,7 +118,7 @@
             timer: 20000,
             showConfirmButton: false
         });
-        var hospId = readSelect("hospital");
+        var hospId = readSelect("CMhospitals");
         var docId = readSelect("docList");
         ajaxCall("/getChannelSessionsServlet",
                 'hospId=' + hospId +
@@ -143,7 +143,7 @@
             timer: 20000,
             showConfirmButton: false
         });
-        var hospId = readSelect("hospital");
+        var hospId = readSelect("CMhospitals");
         ajaxCall("/getDoctorListOfHospitalServlet",
                 'hospId=' + hospId, processResponse);
     }
