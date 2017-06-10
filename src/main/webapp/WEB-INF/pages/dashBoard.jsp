@@ -19,12 +19,11 @@
     <span style="font-size:100%;"><b>ONLINE </b>, current patient no. of your doctor</span>
 </div>
 <div>
-    <img id="ads" src="http://prettygoodplan.com/wp-content/uploads/2011/07/Advertising.jpg" style="max-width: 100%; height: 100px" />
-            <span>
-                <p id="timeDiff" style="text-align: right;font-size:80%;">Select a Hospital, Doctor and Session to view
-                    their status</p>
-            </span>
+    <img id="ads" src="http://prettygoodplan.com/wp-content/uploads/2011/07/Advertising.jpg" style="max-width: 100%; height: 100px; margin-left: auto;margin-right: auto; display: block;" />
 </div>
+<span>
+    <p id="timeDiff" style="text-align: right; font-size:80%;">Select a Hospital, Doctor and Session to view their status</p>
+</span>
 <div class="w3-container">
 
     <p class="watch">
@@ -198,7 +197,7 @@
 
 
     window.onload = function() {
-        setInterval(loadImage,500);
+        setInterval(loadImage,3000);
 //        loadImage();
     };
 
